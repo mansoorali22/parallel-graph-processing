@@ -56,3 +56,71 @@ mpicxx -fopenmp -o p1 P.cpp
 
 # Run with 4 MPI processes (you can adjust the number)
 mpirun -np 4 ./p1
+```
+
+#### ⏳ Sequential Version (S.cpp)
+
+```bash
+# Compile the sequential version
+g++ -o s1 S.cpp
+
+# Run the sequential executable
+./s1
+```
+
+## 🚀 Experimental Results
+
+| Dataset          | Execution Type | Time Taken       |
+|------------------|----------------|------------------|
+| Email-Formatted  | Sequential     | 2217 ms          |
+|                  | Parallel       | 12.15 seconds    |
+| Enron-Formatted  | Sequential     | 2060 ms          |
+|                  | Parallel       | 2.14 seconds     |
+| Doctor Who       | Sequential     | 91 ms            |
+|                  | Parallel       | 0.347 seconds    |
+
+### 📈 Speedup Formula
+
+```
+Speedup = Sequential Time / Parallel Time
+```
+
+## 🧩 Key Concepts
+
+### MPI Usage
+- `MPI_Bcast`: Broadcasting graph data to all nodes.
+- `MPI_Scatter`: Distributing node pairs to different processes.
+- `MPI_Barrier`: Synchronization point for all processes.
+- `MPI_Wtime`: Measuring execution time.
+
+### OpenMP Usage
+- `omp_set_num_threads`: Set maximum threads.
+- `#pragma omp parallel`: Start of parallel region.
+- `#pragma omp critical`: Synchronize shared resource access.
+
+## 🧪 Testing and Optimization
+
+### Challenges
+- Preprocessing node labels into numeric format.
+- Ensuring consistent outputs in parallel execution.
+- Load balancing and avoiding race conditions.
+
+### Optimization Techniques
+- Efficient mapping of node labels using hash maps.
+- Independent data structures in threads to avoid conflicts.
+- Critical sections for merging results safely.
+
+## 📊 Graphical Visualizations
+- Bar and line graphs to visualize execution time and speedup.
+
+## 🧠 Insights & Discussion
+
+- **Scalability:** Parallel implementation showed significant speedups for larger graphs.
+- **Accuracy:** Minor variations in floating-point precision and thread timing can lead to output differences between sequential and parallel versions.
+- **Performance Bottlenecks:** Communication overhead and thread synchronization required careful tuning.
+
+## ✅ Conclusion
+
+This project demonstrated the significant performance benefits of using parallel programming models like **MPI** and **OpenMP** for large-scale graph processing tasks. The hybrid approach allowed both distributed and shared-memory computations, achieving efficiency gains while highlighting practical challenges like synchronization, correctness, and scalability.
+
+---
